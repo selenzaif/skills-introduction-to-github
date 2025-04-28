@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> tahminler = new ArrayList<>();
+
+        System.out.println("Sayı Tahmin Oyununa Hoş Geldiniz!");
+
+        int rastgeleSayi = (int) (Math.random() * 100) + 1;
+        int tahmin = 0;
+        int denemeSayisi = 0;
+        boolean dogruGiris;
+
+        do {
+            dogruGiris = false;
+
+            while (!dogruGiris) {
+                System.out.print("Bir sayı tahmin edin (1-100): ");
+                if (scanner.hasNextInt()) {
+                    tahmin = scanner.nextInt();
+                    if (tahmin >= 1 && tahmin <= 100) {
+                        dogruGiris = true;
+                    } else {
+                        System.out.println("Hatalı giriş! Lütfen 1 ile 100 arasında bir sayı giriniz.");
+                    }
+                } else {
+                    System.out.println("Hatalı giriş! Lütfen bir sayı girin.");
+                    scanner.next();
+                }
+            }
+
+            tahminler.add(tahmin);
+            denemeSayisi++;
+
+            if (tahmin < rastgeleSayi) {
+                System.out.println("Daha büyük bir sayı girin.");
+            } else if (tahmin > rastgeleSayi) {
+                System.out.println("Daha küçük bir sayı girin.");
+            } else {
+                System.out.println("Tebrikler doğru tahmin.");
+                System.out.println("Toplam " + denemeSayisi + " denediniz.");
+            }
+        } while (tahmin != rastgeleSayi);
+
+        System.out.print("Tahminler: ");
+        for (int i = 0; i < tahminler.size(); i++) {
+            System.out.print(tahminler.get(i));
+            if (i != tahminler.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println();
+        System.out.println("Oyun bitti.");
+
+
+    }
+}
